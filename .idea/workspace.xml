@@ -4,7 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="9f236139-396c-48f3-bb6e-1c3d96181bb3" name="Changes" comment="" />
+=======
+    <list default="true" id="9f236139-396c-48f3-bb6e-1c3d96181bb3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/acs_fl/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/acs_fl/acs_fl_stack.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client1_cdk/client_fedlearn.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client1_cdk/client_fedlearn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client1_cdk/code_repo/MODEL.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client1_cdk/code_repo/MODEL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client1_cdk/local_data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client1_cdk/local_data_processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client2_cdk/client_fedlearn.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client2_cdk/client_fedlearn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client2_cdk/code_repo/MODEL.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client2_cdk/code_repo/MODEL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clients/Client2_cdk/local_data_processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/clients/Client2_cdk/local_data_processing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lambdas/FedAvg_func/SERVER_AGGREGATION.py" beforeDir="false" afterPath="$PROJECT_DIR$/lambdas/FedAvg_func/SERVER_AGGREGATION.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lambdas/endTraining.py" beforeDir="false" afterPath="$PROJECT_DIR$/lambdas/endTraining.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lambdas/prepareNextRound.py" beforeDir="false" afterPath="$PROJECT_DIR$/lambdas/prepareNextRound.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lambdas/serverinitsns.py" beforeDir="false" afterPath="$PROJECT_DIR$/lambdas/serverinitsns.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/server_stack.py" beforeDir="false" afterPath="$PROJECT_DIR$/server/server_stack.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit/test_acs_fl_stack.py" beforeDir="false" />
+    </list>
+>>>>>>> 0446d34 (AHSK-116 feat : fl server and client 추가)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +69,13 @@
       <option name="presentableId" value="Default" />
       <updated>1707325678457</updated>
       <workItem from="1707325679602" duration="1038000" />
+<<<<<<< HEAD
+=======
+      <workItem from="1707361554842" duration="3428000" />
+      <workItem from="1707364991615" duration="23968000" />
+      <workItem from="1707806074578" duration="1994000" />
+      <workItem from="1708394855290" duration="2677000" />
+>>>>>>> 0446d34 (AHSK-116 feat : fl server and client 추가)
     </task>
     <servers />
   </component>

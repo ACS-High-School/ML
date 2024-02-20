@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <list default="true" id="9f236139-396c-48f3-bb6e-1c3d96181bb3" name="Changes" comment="" />
 =======
     <list default="true" id="9f236139-396c-48f3-bb6e-1c3d96181bb3" name="Changes" comment="">
@@ -30,6 +31,9 @@
       <change beforePath="$PROJECT_DIR$/tests/unit/test_acs_fl_stack.py" beforeDir="false" />
     </list>
 >>>>>>> 0446d34 (AHSK-116 feat : fl server and client 추가)
+=======
+    <list default="true" id="9f236139-396c-48f3-bb6e-1c3d96181bb3" name="Changes" comment="" />
+>>>>>>> 7d7215f (chore : workspace.xml 변경사항 stash에 저장)
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

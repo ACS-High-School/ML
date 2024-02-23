@@ -4,7 +4,7 @@ __pycache__
 .pytest_cache
 .venv
 *.egg-info
-
+.DS_Store
 
 clients/Client1_cdk/code_repo/.ipynb_checkpoints
 clients/Client2_cdk/code_repo/.ipynb_checkpoints

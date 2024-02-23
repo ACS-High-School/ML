@@ -1,7 +1,7 @@
 {
     "s3_fl_model_registry": "flserverdatabucketcdk0602",
     "dynamodb_table_model_info": "fltaskscdk0602",
-    "member_ID": "2",
-    "sqs_region": "us-east-2",
-    "client_sqs_name": "clientsqs-us-east-2"
+    "member_ID": "4",
+    "sqs_region": "us-west-2",
+    "client_sqs_name": "clientsqs-us-west-2"
 }

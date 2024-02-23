@@ -3,11 +3,11 @@ import os
 
 import aws_cdk as cdk
 
-from acs_fl.acs_fl_stack import AcsFlStack
+from server.server_stack import ServerStack
 
 
 app = cdk.App()
-AcsFlStack(app, "AcsFlStack",
+ServerStack(app, "ServerStack",
     # If you don't specify 'env', this stack will be environment-agnostic.
     # Account/Region-dependent features and context lookups will not work,
     # but a single synthesized template can be deployed anywhere.

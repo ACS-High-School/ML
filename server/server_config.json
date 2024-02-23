@@ -4,11 +4,11 @@
     "s3_fl_model_registry": "flserverdatabucketcdk0602",
     "dynamodb_table_model_info": "fltaskscdk0602", 
     "starting_round_id": "0",
-    "num_clients_required": "2",
+    "num_clients_required": "4",
     "num_client_epochs": "5",
     "model_file_name": "MODEL.py",
     "aggregation_alg": "FedAvg",
-    "fl_rounds": "8",
+    "fl_rounds": "5",
     "timeout_seconds_per_fl_round": "1000",
     "clients": 
     [
@@ -19,8 +19,18 @@
         },
         {
             "member_ID": "2",
-            "sqs_region_2": "us-west-2",
-            "client_queue_name_2": "clientsqs-us-west-2"
+            "sqs_region_2": "us-east-2",
+            "client_queue_name_2": "clientsqs-us-east-2"
+        },
+        {
+            "member_ID": "3",
+            "sqs_region_3": "us-west-1",
+            "client_queue_name_3": "clientsqs-us-west-1"
+        },
+        {
+            "member_ID": "4",
+            "sqs_region_4": "us-west-2",
+            "client_queue_name_4": "clientsqs-us-west-2"
         }
     ]
 }

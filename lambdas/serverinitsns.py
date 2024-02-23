@@ -91,7 +91,7 @@ def lambda_handler(event, context):
     client_sqs = create_sqs_subscribe_sns_topic(sqs_region, client_queue_name, sns, sns_topic_arn)
     sqs_purge(sqs_region, client_queue_name)
 
-    # client 2
+    # client 4
     sqs_region = event["sqs_region_4"]
     client_queue_name = event["client_queue_name_4"]
     client_sqs = create_sqs_subscribe_sns_topic(sqs_region, client_queue_name, sns, sns_topic_arn)

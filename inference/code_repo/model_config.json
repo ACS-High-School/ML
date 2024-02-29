@@ -1,0 +1,6 @@
+{
+    "bucket_name": "flserverdatabucketcdk0602",
+    "model_name": "sagemaker_demo_model",
+    "model_version": "1",
+    "weight_file_key": "train_weight_round_4.npy"
+}

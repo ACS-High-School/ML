@@ -20,7 +20,7 @@ def setup_and_save_model(local_weights_file, model_save_path):
     weights = np.load(local_weights_file, allow_pickle=True)
     model.set_weights(weights)
     tf.keras.models.save_model(model, model_save_path, save_format='tf')
-    shutil.rmtree(local_weights_file)
+    os.remove(local_weights_file)
 
 
 def compress_and_upload_model_to_s3(source_dir, target_dir, bucket, object_key):
@@ -35,4 +35,4 @@ def compress_and_upload_model_to_s3(source_dir, target_dir, bucket, object_key):
     s3_client = boto3.client('s3')
     s3_client.upload_file(f'{object_key}', bucket, object_key)
 
-    shutil.rmtree(object_key)
+    os.remove(object_key)

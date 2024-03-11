@@ -15,10 +15,9 @@ def lambda_handler(event, context):
     segments = file_key.split('/')
     file_key_segments = segments[1].split('-')
     
-    id_num = file_key_segments[0]
-    user_name = file_key_segments[1]
-    task_name = file_key_segments[2]
-    model_name = file_key_segments[3]
+    user_name = file_key_segments[0]
+    task_name = file_key_segments[1]
+    model_name = file_key_segments[2]
     
     file_obj = s3_client.get_object(Bucket=bucket_name, Key=file_key)
     file_content = file_obj['Body'].read()
@@ -45,7 +44,7 @@ def lambda_handler(event, context):
     result_df.to_csv(output_csv_path, index=False)
     
     output_bucket = 'b3o-inference'
-    output_key = f'output/{id_num}-{user_name}-{task_name}-{model_name}-output.csv'
+    output_key = f'output/{user_name}-{task_name}-{model_name}-output.csv'
         
     with open(output_csv_path, 'rb') as f:
         s3_client.upload_fileobj(f, output_bucket, output_key)

@@ -1,25 +1,20 @@
-import sys
 import boto3
+from botocore.exceptions import NoCredentialsError, ClientError
 import numpy as np
-import tensorflow as tf # use tensorflow for local training
 import json
 import warnings
-import local_data_processing
-import client_fedlearn
+from .client_fedlearn import FLClient
 import time
 import os
 import glob
-import shutil
-warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
+warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning)
 
 
-def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_client):    
+def FL_start(member_ID, config_client, x_train_client, y_train_client, x_test_client, y_test_client):
 
     start_time = 0
     end_time = 0
     hasStarted = True
-    
-    config_client = './client_config.json'
     global_model = None
     
     with open(config_client, 'r') as config_file:
@@ -29,7 +24,7 @@ def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_cl
     member_ID = int(client_config["clients"][member_ID-1]["member_ID"])
     sqs_region = client_config["clients"][member_ID-1]["sqs_region"]
     client_queue_name = client_config["clients"][member_ID-1]["client_queue_name"]
-    
+
     cross_account = False
     if (
         "cross_account_sqs_role" in client_config.keys() and 
@@ -42,7 +37,7 @@ def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_cl
                "cross_account_s3_role" not in client_config.keys() and
                "cross_account_dynamodb_role" not in client_config.keys())
     
-    client = client_fedlearn.FLClient(member_ID, x_train_client, y_train_client, x_test_client, y_test_client)
+    client = FLClient(member_ID, x_train_client, y_train_client, x_test_client, y_test_client)
     
     signalTerminate = False
     while not signalTerminate:
@@ -78,10 +73,25 @@ def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_cl
             if int(transaction['roundId']) > curr_round:
                 curr_round = transaction['roundId']
             
-        if len(transactions) > 0: 
-            infoServer = client.processGlobalModelInfoFromServer(transactions)  
-            
-            if (infoServer != None):            
+        if len(transactions) > 0:
+            s3_client = boto3.client('s3')
+            file_path = 'client_repo/MODEL.py'
+            bucket_name = 'b3o'
+            s3_file_path = f'fedlearn/model/{transaction["Task_Name"]}-model.py'
+
+            try:
+                s3_client.head_object(Bucket=bucket_name, Key=s3_file_path)
+            except ClientError as e:
+                error_code = int(e.response['Error']['Code'])
+                if error_code == 404:
+                    s3_client.upload_file(file_path, bucket_name, s3_file_path)
+                else:
+                    print(f"Error occurred: {e}")
+
+
+            infoServer = client.processGlobalModelInfoFromServer(transactions)
+
+            if (infoServer != None):
                 if hasStarted:
                     start_time = time.monotonic()
                     hasStarted = False
@@ -93,13 +103,13 @@ def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_cl
                         "roundId":  transaction["roundId"],
                         "memberId": transaction["member_ID"],
                         "numClientEpochs": transaction["numClientEpochs"],
-                        "trainAcc": float(transaction["trainAcc"]) if transaction["trainAcc"] != "NA" else "NA", 
+                        "trainAcc": float(transaction["trainAcc"]) if transaction["trainAcc"] != "NA" else "NA",
                         "testAcc" : float(transaction["testAcc"]) if transaction["testAcc"] != "NA" else "NA", 
                         "trainLoss": float(transaction["trainLoss"]) if transaction["trainLoss"] != "NA" else "NA", 
                         "testLoss" : float(transaction["testLoss"]) if transaction["testLoss"] != "NA" else "NA", 
                         "weightsFile": transaction["weightsFile"],
                         "numClientsRequired": transaction["numClientsRequired"],
-                        "source": transaction["source"],         
+                        "source": transaction["source"],
                         "taskToken": transaction["TaskToken"],
                     }                        
                 print("Received notification: {} \n".format(str(printDiction))) 
@@ -132,30 +142,6 @@ def FL_start(member_ID, x_train_client, y_train_client, x_test_client, y_test_cl
                 client.roundId = client.roundId + 1
 
     
-    if signalTerminate:   
-        
-        model_folder_path = './models'
-        bucket_name = 'b3o'
-        s3_folder_path = 'fedlearn/output/'
-        task_name = transaction["Task_Name"]
-        upload_file_name = f'{task_name}-output.npy'
-
-        
-        files = glob.glob(f'{model_folder_path}/*')
-        latest_file = max(files, key=os.path.getmtime)
-    
-        
-        s3 = boto3.client('s3')
-        s3.upload_file(latest_file, bucket_name, s3_folder_path + upload_file_name)
-            
-        client_folder_path = './client_repo'
-        for item in glob.glob(client_folder_path + '/*'):
-            if os.path.isfile(item):
-                os.remove(item)
-
-        for item in glob.glob(model_folder_path + '/*'):
-            if os.path.isfile(item):
-                os.remove(item)
 
   
 

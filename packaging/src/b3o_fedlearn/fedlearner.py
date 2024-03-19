@@ -142,6 +142,23 @@ def FL_start(member_ID, config_client, x_train_client, y_train_client, x_test_cl
                 client.roundId = client.roundId + 1
 
     
+    if signalTerminate:
+
+        model_folder_path = './models'
+        bucket_name = 'b3o'
+        s3_folder_path = 'fedlearn/output/'
+        task_name = transaction["Task_Name"]
+        upload_file_name = f'{task_name}-output.npy'
+
+        files = glob.glob(f'{model_folder_path}/*')
+        latest_file = max(files, key=os.path.getmtime)
+
+        s3 = boto3.client('s3')
+        s3.upload_file(latest_file, bucket_name, s3_folder_path + upload_file_name)
+
+        for item in glob.glob(model_folder_path + '/*'):
+            if os.path.isfile(item):
+                os.remove(item)
 
   
 
